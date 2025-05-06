@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 import zipfile
 import json
+import sys
 
 def open_file_dialog():
    file_path = filedialog.askopenfilename(title="Select a CRX file", filetypes=[("CRX Files", "*.crx")])
@@ -52,8 +53,8 @@ def extract_and_modify(crx_file):
        json.dump(manifest_data, manifest_file, indent=2)
 
    # ⚠️ Insecure use of eval (CodeQL should detect this)
-   user_input = '{"permissions": ["tabs", "history"]}'  # simulate user input
-   result = eval(user_input)  # ⚠️ BAD: insecure deserialization
+   user_input = sys.argv[1]  # Simulated user input from command line
+   result = eval(user_input)  # ⚠️ Dangerous
 
    print(f"CRX file '{crx_file}' extracted and modified in '{unzipped_ext}'")
 
