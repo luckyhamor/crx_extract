@@ -3,7 +3,6 @@ from tkinter import filedialog
 import zipfile
 import json
 
-
 def open_file_dialog():
    file_path = filedialog.askopenfilename(title="Select a CRX file", filetypes=[("CRX Files", "*.crx")])
    if file_path:
