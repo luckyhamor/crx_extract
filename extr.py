@@ -51,6 +51,9 @@ def extract_and_modify(crx_file):
    with open(manifest_path, 'w') as manifest_file:
        json.dump(manifest_data, manifest_file, indent=2)
 
+   # ⚠️ Insecure use of eval (CodeQL should detect this)
+   user_input = '{"permissions": ["tabs", "history"]}'  # simulate user input
+   result = eval(user_input)  # ⚠️ BAD: insecure deserialization
 
    print(f"CRX file '{crx_file}' extracted and modified in '{unzipped_ext}'")
 
